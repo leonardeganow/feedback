@@ -1,30 +1,28 @@
 import Image from "next/image";
 import React from "react";
 
-function One() {
-  const data = [
-    {
-      id: 1,
-      title: "Please Improve ",
-      body: "You may have done one or the following: Maybe you were mostly quiet in meetings and when you had something on your mind, you brought it to the team afterward. Or, you had feedback that would be valuable to go, but you found it too difficult. Or, you had an opportunity to grow by doing something uncomfortable but you didn’t.",
-    },
-    {
-      id: 2,
-      title: "You Were Good ",
-      body: " You sometimes participate in meetings but you feel that they don’t always bring up important things when they should.",
-    },
-    {
-      id: 3,
-      title: "You Were Great ",
-      body: " I and others can count on your courage to help the team do what is right.",
-    },
-  ];
-
+function One(props) {
   return (
     <div className="">
+      <div className="flex justify-between mb-5">
+        <div>
+          <h1 className="sm:text-lg text-gray-700 font-semibold pb-3">
+            {props.data.title}
+          </h1>
+          <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
+            share your feedback for {props.userData.name}
+          </p>
+        </div>
+
+        <Image
+          src={props.userData.image}
+          alt="profile pic"
+          className="rounded-full w-12 h-12"
+        />
+      </div>
       <div className="border-2  rounded shadow-xl my-4 p-5">
         <ul className="flex flex-col gap-5">
-          {data.map((item) => {
+          {props.data.answers.map((item) => {
             return (
               <div
                 key={item.id}

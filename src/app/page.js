@@ -34,29 +34,45 @@ export default function Home() {
           className="flex flex-col text-center gap-y-8 items-center"
         >
           <h1 className="text-gray-500">Feedback</h1>
-          <input
-            type="text"
-            className={clsx({
-              "outline-none p-3 border": true,
-              "border-green-500 border-2":
-                formState.dirtyFields?.email &&
-                !!!formState.errors?.email === true,
-              "border-red-500 border-2": !!formState.errors?.email === true,
-            })}
-            placeholder="enter your email"
-            {...register("email")}
-          />
-          <input
-            type="password"
-            className={clsx({
-              "outline-none p-3 border": true,
-              "border-green-500 border-2":
-                formState.dirtyFields?.password &&
-                !!!formState.errors?.password === true,
-              "border-red-500 border-2": !!formState.errors?.password === true,
-            })}            placeholder="*******"
-            {...register("password")}
-          />
+          <div>
+            <input
+              type="text"
+              className={clsx({
+                "outline-none p-3 border": true,
+                "border-green-500 border-2":
+                  formState.dirtyFields?.email &&
+                  !!!formState.errors?.email === true,
+                "border-red-500 border-2": !!formState.errors?.email === true,
+              })}
+              placeholder="enter your email"
+              {...register("email")}
+            />
+            {formState.errors.email && (
+              <p className="text-red-500 text-left text-xs py-1">
+                {formState.errors.email.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <input
+              type="password"
+              className={clsx({
+                "outline-none p-3 border": true,
+                "border-green-500 border-2":
+                  formState.dirtyFields?.password &&
+                  !!!formState.errors?.password === true,
+                "border-red-500 border-2":
+                  !!formState.errors?.password === true,
+              })}
+              placeholder="*******"
+              {...register("password")}
+            />
+            {formState.errors.password && (
+              <p className="text-red-500 text-left text-xs py-1">
+                {formState.errors.password.message}
+              </p>
+            )}
+          </div>
           <button
             type="submit"
             className="bg-green-700 px-5 py-1 text-gray-200 rounded active:bg-green-900"
