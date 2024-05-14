@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import profilepic from "../../../public/images/profilepic.png"
+import logo from "../../../public/images/feed.png"
 
 function Navbar() {
   const pathname = usePathname();
@@ -29,7 +30,7 @@ function Navbar() {
 
   return (
     <div className="h-[7vh]  flex justify-between items-center sm:px-20 px-5 bg-gray-100">
-      <div className="font-black text-xl">Feedback</div>
+          <Image src={logo} width={150}  className=""/>
       <div className="sm:flex gap-16 hidden">
         {navOptions.map((option) => {
           return (
