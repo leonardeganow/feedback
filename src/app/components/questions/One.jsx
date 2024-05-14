@@ -28,8 +28,8 @@ function One(props) {
                 key={item.id}
                 className="bg-gray-100 cursor-pointer p-3 font-medium hover:bg-gray-500 hover:text-white"
               >
-                <h1 className="font-bold">{item.title}</h1>
-                <p className="text-sm sm:text-md">{item.body}</p>
+                <h1 className="font-bold  ">{item.title}</h1>
+                <p className="text-sm sm:text-md  font-light">{item.body}</p>
               </div>
             );
           })}

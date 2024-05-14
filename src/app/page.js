@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { Circles } from "react-loader-spinner";
 import { useState } from "react";
 import { FaFire } from "react-icons/fa";
-import logo from "../../public/images/feed.png"
+import logo from "../../public/images/feed.png";
 import Image from "next/image";
 
 export default function Home() {
@@ -43,10 +43,15 @@ export default function Home() {
       }
       reset(values);
     } catch (error) {
+      if (error?.code === "ERR_NETWORK") {
+        setErrors(error?.message);
+        return;
+      }
       console.log(error);
-      setErrors(error.response.data.error);
+      setErrors(error?.response?.data?.error);
     }
   };
+
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24 shadow-lg">
@@ -56,15 +61,14 @@ export default function Home() {
           className="flex flex-col text-center gap-y-6 items-center"
         >
           <div>
-
-          {/* <h1 className="text-gray-500 mb-1">Feedback</h1> */}
-          <Image src={logo} width={150}  className=""/>
-          {errors && (
-            <div className="flex items-center gap-2 bg-red-500 text-xs p-1 text-red-100 border-4 border-red-200 rounded">
-              <FaFire size={20}/>
-              {errors}
-            </div>
-          )}
+            {/* <h1 className="text-gray-500 mb-1">Feedback</h1> */}
+            <Image src={logo} width={150} className="" />
+            {errors && (
+              <div className="flex items-center justify-center gap-2 bg-red-500 text-xs p-1 text-red-100 border-4 border-red-200 rounded">
+                <FaFire size={20} />
+                {errors}
+              </div>
+            )}
           </div>
           <div>
             <input

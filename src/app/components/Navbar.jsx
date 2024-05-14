@@ -1,9 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import profilepic from "../../../public/images/profilepic.png"
-import logo from "../../../public/images/feed.png"
+import profilepic from "../../../public/images/profilepic.png";
+import logo from "../../../public/images/feed.png";
 
 function Navbar() {
   const pathname = usePathname();
@@ -30,7 +31,14 @@ function Navbar() {
 
   return (
     <div className="h-[7vh]  flex justify-between items-center sm:px-20 px-5 bg-gray-100">
-          <Image src={logo} width={150}  className=""/>
+      <Image
+        src={logo}
+        width={150}
+        height={50}
+     
+        alt="logo"
+        priority
+      />
       <div className="sm:flex gap-16 hidden">
         {navOptions.map((option) => {
           return (
@@ -41,19 +49,25 @@ function Navbar() {
               }  h-[7vh] flex items-center px-5 `}
             >
               <Link href={option.href}>{option.title}</Link>
-              <div className="bg-green-600 text-gray-100 text-[8px] flex justify-center items-center  rounded-full w-4 h-4 absolute -right-0 top-3">
+           {option.notifications &&   <div className="bg-green-600 text-gray-100 text-[8px] flex justify-center items-center  rounded-full w-4 h-4 absolute -right-0 top-3">
                 {option.notifications}
-              </div>
+              </div>}
             </div>
           );
         })}
       </div>
       <div className="text-sm flex items-center gap-3">
-        <Image src={profilepic} alt="" width={30} height={30} className=" rounded-full"/>
+        <Image
+          src={profilepic}
+          alt=""
+          width={30}
+          height={30}
+          className=" rounded-full"
+        />
         <div>
           <h1 className="text-gray-600">Leonard Adjei</h1>
           <Link href="/" className="text-red-500  tracking-widest">
-           <p className="text-[10px] font-bold text-gray-500">LOGOUT</p> 
+            <p className="text-[10px] font-bold text-gray-500">LOGOUT</p>
           </Link>
         </div>
       </div>

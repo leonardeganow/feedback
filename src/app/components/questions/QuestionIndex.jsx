@@ -58,7 +58,7 @@ function QuesionsIndex(props) {
       <div className="pb-5">
         <div className="w-full mt-4 bg-gray-200 rounded-full h-2 dark:bg-gray-400">
           <div
-            className="bg-green-600 h-2 rounded-full"
+            className="bg-green-500 h-2 rounded-full"
             style={{ width: `${(currentStep / questions.length) * 100}%` }}
           ></div>
         </div>
