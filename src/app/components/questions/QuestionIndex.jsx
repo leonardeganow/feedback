@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import One from "./One";
 import Two from "./Two";
-import Image from "next/image";
 import { IoChevronBack } from "react-icons/io5";
 import { questions } from "@/app/api";
 import Third from "./Third";
