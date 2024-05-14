@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-function One(props) {
+function Third(props) {
   return (
     <div className="">
       <div className="flex justify-between mb-5">
@@ -21,22 +21,13 @@ function One(props) {
         />
       </div>
       <div className="border-r-2 border-t-2 border-l-2 mt-4 p-5">
-        <ul className="flex flex-col gap-5">
-          {props.data.answers.map((item) => {
-            return (
-              <div
-                key={item.id}
-                className="bg-gray-100 cursor-pointer p-3 font-medium hover:bg-gray-500 hover:text-white"
-              >
-                <h1 className="font-bold  ">{item.title}</h1>
-                <p className="text-sm sm:text-md  font-light">{item.body}</p>
-              </div>
-            );
-          })}
-        </ul>
+        <textarea
+          className="resize-none rounded-md border w-full outline-none p-2 h-[20vh]"
+          placeholder="Say something"
+        ></textarea>
       </div>
     </div>
   );
 }
 
-export default One;
+export default Third;

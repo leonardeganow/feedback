@@ -65,7 +65,7 @@ function Two(props) {
         />
       </div>
 
-      <div className="border-2  shadow-xl rounded  min-h-[25vh] flex flex-col justify-center p-3">
+      <div className="border-r-2 border-t-2 border-l-2 min-h-[19vh] flex flex-col justify-center p-3 ">
         <div className="flex justify-center gap-1 items-center ">
           {ratingsOptions.map((rating) => {
             return (
