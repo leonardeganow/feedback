@@ -31,14 +31,9 @@ function Navbar() {
 
   return (
     <div className="h-[7vh]  flex justify-between items-center sm:px-20 px-5 bg-gray-100">
-      <Image
-        src={logo}
-        width={150}
-        height={50}
-     
-        alt="logo"
-        priority
-      />
+      <Link href="/test">
+        <Image src={logo} width={150} height={50} alt="logo" priority />
+      </Link>
       <div className="sm:flex gap-16 hidden">
         {navOptions.map((option) => {
           return (
@@ -49,9 +44,11 @@ function Navbar() {
               }  h-[7vh] flex items-center px-5 `}
             >
               <Link href={option.href}>{option.title}</Link>
-           {option.notifications &&   <div className="bg-green-600 text-gray-100 text-[8px] flex justify-center items-center  rounded-full w-4 h-4 absolute -right-0 top-3">
-                {option.notifications}
-              </div>}
+              {option.notifications && (
+                <div className="bg-green-600 text-gray-100 text-[8px] flex justify-center items-center  rounded-full w-4 h-4 absolute -right-0 top-3">
+                  {option.notifications}
+                </div>
+              )}
             </div>
           );
         })}

@@ -9,6 +9,7 @@ import pic3 from "/public/images/pic3.jpeg";
 import pic4 from "/public/images/pic4.jpg";
 import pic5 from "/public/images/pic5.jpg";
 import QuesionsIndex from "../components/questions/QuestionIndex";
+import clsx from "clsx";
 
 function page() {
   const [startQuestions, setStartQuestions] = useState(false);
@@ -18,26 +19,31 @@ function page() {
       id: 1,
       image: pic1,
       name: "Chris Johnson",
+      status: "incomplete",
     },
     {
       id: 2,
       image: pic2,
       name: "Nico Perez",
+      status: "incomplete",
     },
     {
       id: 3,
       image: pic3,
       name: "Nathaniel Moon",
+      status: "complete",
     },
     {
       id: 4,
       image: pic4,
       name: "Denis Denison",
+      status: "complete",
     },
     {
       id: 5,
       image: pic5,
       name: "Paul Carter",
+      status: "complete",
     },
   ];
 
@@ -45,16 +51,21 @@ function page() {
     <div className="flex flex-col items-between justify-between h-screen">
       <Navbar />
       {startQuestions ? (
-        <QuesionsIndex setStartQuestions={setStartQuestions} userData={userData}/>
+        <QuesionsIndex
+          setStartQuestions={setStartQuestions}
+          userData={userData}
+        />
       ) : (
         <div className="  sm:w-[50%] w-[95%]  mx-auto">
-          <h1 className="font-bold text-xl mb-5 text-gray-700">Share Feedback</h1>
+          <h1 className="font-bold text-xl mb-5 text-gray-700">
+            Share Feedback
+          </h1>
           <div className="border-2  rounded shadow-lg">
             {data.map((item) => {
               return (
                 <div
                   key={item.id}
-                  className="flex hover:bg-sky-100 cursor-pointer justify-between items-center px-3 py-5 border-b"
+                  className="flex hover:bg-green-50 cursor-pointer justify-between items-center px-3 py-5 border-b"
                 >
                   <div className="flex items-center gap-3">
                     <Image
@@ -70,9 +81,16 @@ function page() {
                       setStartQuestions(true);
                       setUserData(item);
                     }}
-                    className="bg-green-700 px-10 py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointer"
+                    className={clsx({
+                      "bg-green-700 w-[40%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
+                        item.status === "incomplete",
+                      "bg-white border-2  shadow text-gray-700 w-[40%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
+                        item.status === "complete",
+                    })}
                   >
-                    fill out
+                    {item.status === "complete"
+                      ? "view submissions"
+                      : " fill out"}
                   </button>
                 </div>
               );
