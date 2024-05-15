@@ -48,7 +48,7 @@ function page() {
   ];
 
   return (
-    <div className="flex flex-col items-between justify-between h-screen">
+    <div className="flex flex-col  h-screen">
       <Navbar />
       {startQuestions ? (
         <QuesionsIndex
@@ -56,7 +56,7 @@ function page() {
           userData={userData}
         />
       ) : (
-        <div className="  sm:w-[50%] w-[95%]  mx-auto">
+        <div className="  sm:w-[50%] w-[95%]  mx-auto  min-h-[88vh] pt-14">
           <h1 className="font-bold text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
