@@ -5,10 +5,18 @@ import { IoChevronBack } from "react-icons/io5";
 import { questions } from "@/app/api";
 import Third from "./Third";
 import Four from "./Four";
+import { useForm } from "react-hook-form";
+import { defaultFormValues } from "./defaultFormValues";
+import clsx from "clsx";
 
 function QuesionsIndex(props) {
-  const [currentStep, setCurrentStep] = useState(1); //NOTE - this tracks the current step of the whole form
-  const totalSteps = 3; //NOTE - total steps for the whole form
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selected, setSelected] = useState(false);
+  const totalSteps = 3;
+
+  const useFormHandler = useForm({
+    defaultValues: defaultFormValues,
+  });
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
@@ -24,11 +32,41 @@ function QuesionsIndex(props) {
   const renderForm = () => {
     switch (currentStep) {
       case 1:
-        return <One userData={props.userData} data={questions[0]} />;
+        return (
+          <One
+            userData={props.userData}
+            data={questions[0]}
+            useFormHandler={useFormHandler}
+            setSelected={setSelected}
+            handleBack={handleBack}
+            handleNext={handleNext}
+            currentStep={currentStep}
+          />
+        );
       case 2:
-        return <Two userData={props.userData} data={questions[1]} />;
+        return (
+          <Two
+            userData={props.userData}
+            data={questions[1]}
+            useFormHandler={useFormHandler}
+            setSelected={setSelected}
+            handleBack={handleBack}
+            handleNext={handleNext}
+            currentStep={currentStep}
+          />
+        );
       case 3:
-        return <Third userData={props.userData} data={questions[2]} />;
+        return (
+          <Third
+            userData={props.userData}
+            data={questions[2]}
+            useFormHandler={useFormHandler}
+            setSelected={setSelected}
+            handleBack={handleBack}
+            handleNext={handleNext}
+            currentStep={currentStep}
+          />
+        );
       default:
         return <Four />;
     }
@@ -47,21 +85,6 @@ function QuesionsIndex(props) {
       {renderForm()}
       {currentStep !== 4 && (
         <div className="  border-l-2 border-b-2 border-r-2  p-5">
-          <div className="flex justify-between text-xs capitalize pt-3 ">
-            <button
-              onClick={handleBack}
-              className="border border-black text-black w-[150px] rounded py-2 capitalize"
-            >
-              previous
-            </button>
-
-            <button
-              onClick={handleNext}
-              className="bg-green-700 text-white w-[150px] rounded py-2 capitalize hover:bg-green-900 active:bg-green-800"
-            >
-              {currentStep === 3 ? "submit" : "next"}
-            </button>
-          </div>
           <div className="pt-3">
             <div className="w-full mt-4 bg-gray-200 rounded-full h-2 dark:bg-gray-400">
               <div

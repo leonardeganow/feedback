@@ -1,50 +1,10 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import Ratings from "../Ratings";
+import clsx from "clsx";
 
 function Two(props) {
   const [ratings, setRatings] = useState(0);
-  const ratingsOptions = [
-    {
-      id: 1,
-      value: 1,
-    },
-    {
-      id: 2,
-      value: 2,
-    },
-    {
-      id: 3,
-      value: 3,
-    },
-    {
-      id: 4,
-      value: 4,
-    },
-    {
-      id: 5,
-      value: 5,
-    },
-    {
-      id: 6,
-      value: 6,
-    },
-    {
-      id: 7,
-      value: 7,
-    },
-    {
-      id: 8,
-      value: 8,
-    },
-    {
-      id: 9,
-      value: 9,
-    },
-    {
-      id: 10,
-      value: 10,
-    },
-  ];
 
   return (
     <div>
@@ -66,23 +26,30 @@ function Two(props) {
       </div>
 
       <div className="border-r-2 border-t-2 border-l-2  flex flex-col justify-center  p-3">
-        <div className="flex justify-center gap-2 items-center mt-4 ">
-          {ratingsOptions.map((rating) => {
-            return (
-              <div
-                key={rating.id}
-                onClick={() => {
-                  setRatings(rating.value);
-                }}
-                class={`sm:w-16 sm:h-16 w-10 h-10 cursor-pointer  ${
-                  ratings >= rating.value ? "bg-green-500" : "bg-gray-200"
-                }`}
-              ></div>
-            );
-          })}
-        </div>
+        <Ratings setRatings={setRatings} ratings={ratings} setValue={props.useFormHandler.setValue} name={"answerTwo"} />
         <div className="text-center pt-4 text-gray-700 font-bold">
           {ratings}/10
+        </div>
+        <div className="flex justify-between text-xs capitalize pt-3 ">
+          <button
+            onClick={props.handleBack}
+            className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
+          >
+            previous
+          </button>
+
+          <button
+            onClick={props.handleNext}
+            disabled={props.useFormHandler.watch("answerTwo") === ""}
+            className={clsx({
+              "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
+                props.useFormHandler.watch("answerTwo"),
+              "bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize":
+                props.useFormHandler.watch("answerTwo") === "",
+            })}
+          >
+            {props.currentStep === 3 ? "submit" : "next"}
+          </button>
         </div>
       </div>
     </div>

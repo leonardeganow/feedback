@@ -11,7 +11,12 @@ export default function Custom404() {
         <h1 className="text-4xl font-bold  mb-10 text-gray-700">
           Sorry! The page you are looking for cannot be found. 😢
         </h1>
-        <Link href="/home" className="bg-green-700 text-white px-5 py-2 rounded hover:bg-green-800">Back to home</Link>
+        <Link
+          href="/home"
+          className="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-800"
+        >
+          Back to home
+        </Link>
       </div>
       <Footer />
     </div>

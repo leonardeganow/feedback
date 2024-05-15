@@ -70,7 +70,7 @@ function page() {
                   <div className="flex items-center gap-3">
                     <Image
                       src={item.image}
-                      className="rounded-full w-12 h-12"
+                      className="rounded-full w-12 h-12 hidden sm:block"
                       alt={item.name}
                     />
                     <p className="text-gray-600 font-semibold">{item.name}</p>
@@ -82,9 +82,9 @@ function page() {
                       setUserData(item);
                     }}
                     className={clsx({
-                      "bg-green-700 w-[40%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
+                      "bg-green-600 sm:w-[30%] w-[45%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
                         item.status === "incomplete",
-                      "bg-white border-2  shadow text-gray-700 w-[40%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
+                      "bg-white border border-gray-400 text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
                         item.status === "complete",
                     })}
                   >
