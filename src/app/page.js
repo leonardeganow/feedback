@@ -7,7 +7,7 @@ import { PASSWORD_REGEXP } from "./constants";
 import { loginUser } from "./api/AuthApi";
 import { useRouter } from "next/navigation";
 import { Circles } from "react-loader-spinner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFire } from "react-icons/fa";
 import logo from "../../public/images/feed.png";
 import Image from "next/image";
@@ -51,7 +51,6 @@ export default function Home() {
       setErrors(error?.response?.data?.error);
     }
   };
-
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24 shadow-lg">

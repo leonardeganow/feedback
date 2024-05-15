@@ -65,7 +65,7 @@ function Two(props) {
         />
       </div>
 
-      <div className="border-r-2 border-t-2 border-l-2  flex flex-col justify-center  py-3">
+      <div className="border-r-2 border-t-2 border-l-2  flex flex-col justify-center  p-3">
         <div className="flex justify-center gap-2 items-center mt-4 ">
           {ratingsOptions.map((rating) => {
             return (
