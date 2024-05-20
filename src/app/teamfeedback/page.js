@@ -43,12 +43,16 @@ function page() {
   return (
   <div className="flex flex-col  items-between justify-between h-screen">
     <Navbar />
-          <h1 className='mx-auto'>Team Feedback</h1>
+    <h1 className="font-bold text-xl mb-5 mx-start px-[200px]  text-gray-700">Team Feedback</h1> 
       <div className='flex justify-center '>
+      
+     
         <div className='border w-[300px] h-[400px] border-grey-100'>
+        
+        <div className='border-b border-grey-100 text-xs font-bold text-slate-500 p-2 text-bold'>FEEDBACK RECEIVED</div>
           {data.map((item)=>{
             return(
-              <div className="flex items-center  justify-start border-b p-3 ">
+              <div className="flex items-center  justify-start border-b p-3  hover:bg-sky-100 ">
               <Image
                 src={item.image}
                 className="rounded-full w-10 h-10 "
