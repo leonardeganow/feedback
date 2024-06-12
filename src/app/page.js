@@ -56,7 +56,7 @@ export default function Home() {
     // }
   };
 
-  if(session){
+  if (session) {
     router.push("/home");
     return;
   }
@@ -117,7 +117,7 @@ export default function Home() {
               </p>
             )}
           </div>
-          <button
+          {/* <button
             onClick={() => signIn("github")}
             type="button"
             // disabled={formState.isSubmitting}
@@ -134,6 +134,24 @@ export default function Home() {
           >
          
             Sign in with google
+          </button> */}
+
+          <button type="button" onClick={()=>signIn("github")} className="inline-flex hover:bg-gray-100 h-10  items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/512317/github-142.svg"
+              alt="GitHub"
+              className="h-[18px] w-[18px] "
+            />
+            Log in with GitHub
+          </button>
+
+          <button type="button" onClick={()=>signIn("google")} className="hover:bg-gray-100 inline-flex h-10  items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="h-[18px] w-[18px] "
+            />
+            Log in with Google
           </button>
         </form>
       </div>
