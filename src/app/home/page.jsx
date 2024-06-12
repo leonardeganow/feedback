@@ -10,9 +10,13 @@ import pic4 from "/public/images/pic4.jpg";
 import pic5 from "/public/images/pic5.jpg";
 import QuesionsIndex from "../components/questions/QuestionIndex";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function page() {
   const [startQuestions, setStartQuestions] = useState(false);
+  const { data: session } = useSession();
+  const Router = useRouter();
   const [userData, setUserData] = useState();
   const data = [
     {
@@ -46,6 +50,10 @@ function page() {
       status: "complete",
     },
   ];
+
+  if (!session) {
+    Router.push("/");
+  }
 
   return (
     <div className="flex flex-col  h-screen">
