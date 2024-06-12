@@ -123,20 +123,17 @@ export default function Home() {
             // disabled={formState.isSubmitting}
             className="bg-green-700 px-5 py-1 text-gray-200 rounded active:bg-green-900"
           >
-            {/* {formState.isSubmitting ? (
-              <Circles
-                height="20"
-                width="20"
-                color="white"
-                ariaLabel="circles-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-              />
-            ) : (
-              "log in"
-            )} */}
+         
             Sign in with github
+          </button>
+          <button
+            onClick={() => signIn("google")}
+            type="button"
+            // disabled={formState.isSubmitting}
+            className="bg-green-700 px-5 py-1 text-gray-200 rounded active:bg-green-900"
+          >
+         
+            Sign in with google
           </button>
         </form>
       </div>
