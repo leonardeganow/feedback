@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-function page() {
+function Page() {
   const [feedbacks, setFeedbacks] = useState();
   return (
     <div className="flex flex-col items-between  h-screen">
@@ -31,4 +31,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

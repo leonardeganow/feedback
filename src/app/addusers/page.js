@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { convertImageToBase64 } from "../utils";
+import Link from "next/link";
 
 function Page() {
   const [fullName, setFullName] = useState("");
@@ -45,13 +46,13 @@ function Page() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen ">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md w-full max-w-md"
+        className="border-2 border-green-700 p-5 rounded shadow-lg"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Upload Your Details
+          Add new employee
         </h2>
         {message && (
           <div className={`text-green-500 text-center`}>{message}</div>
@@ -68,6 +69,7 @@ function Page() {
           <input
             type="text"
             id="fullName"
+            disabled={loading}
             value={fullName}
             onChange={handleNameChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
@@ -75,7 +77,7 @@ function Page() {
           />
         </div>
 
-        <div className="mb-6">
+        <div className="">
           <label
             htmlFor="image"
             className="block text-gray-700 font-semibold mb-2"
@@ -85,16 +87,23 @@ function Page() {
           <input
             type="file"
             id="image"
+            disabled={loading}
             onChange={handleImageChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
             accept="image/*"
             required
           />
         </div>
-
+        <Link
+          href="/"
+          className=" flex justify-center py-4 underline cursor-pointer text-blue-500"
+        >
+          back to login
+        </Link>
         <button
           type="submit"
-          className="w-full bg-indigo-500 text-white font-semibold p-2 rounded-lg hover:bg-indigo-600 transition duration-200"
+          disabled={loading}
+          className="w-full bg-green-500 text-white font-semibold p-2 rounded-lg hover:bg-indigo-600 transition duration-200"
         >
           {loading ? "...loading" : "Submit"}
         </button>

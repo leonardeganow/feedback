@@ -10,13 +10,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb", // Set desired value here
-    },
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: {
+//       sizeLimit: "10mb", // Set desired value here
+//     },
+//   },
+// };
 
 export async function POST(request) {
   try {
@@ -39,6 +39,7 @@ export async function POST(request) {
     const newEmployee = new EmployeeModel({
       fullname: data.fullName,
       imageUrl: imageUrl,
+      applicationStatus: "incomplete",
     });
 
     await newEmployee.save();
@@ -53,5 +54,5 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error creating user:", error);
     return NextResponse.json(error.message, { status: 500 });
-  } 
+  }
 }

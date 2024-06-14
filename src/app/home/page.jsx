@@ -3,68 +3,32 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
-import pic1 from "/public/images/pic1.jpg";
-import pic2 from "/public/images/pic2.jpg";
-import pic3 from "/public/images/pic3.jpeg";
-import pic4 from "/public/images/pic4.jpg";
-import pic5 from "/public/images/pic5.jpg";
 import QuesionsIndex from "../components/questions/QuestionIndex";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
+import SkeletonLoader from "./SkeletonLoader";
 
-function page() {
+function Page() {
   const [startQuestions, setStartQuestions] = useState(false);
+  const [employees, setEmployees] = useState(false);
   const { data: session } = useSession();
-  const Router = useRouter();
   const [userData, setUserData] = useState();
-  const data = [
-    {
-      id: 1,
-      image: pic1,
-      name: "Chris Johnson",
-      status: "incomplete",
-    },
-    {
-      id: 2,
-      image: pic2,
-      name: "Nico Perez",
-      status: "incomplete",
-    },
-    {
-      id: 3,
-      image: pic3,
-      name: "Nathaniel Moon",
-      status: "complete",
-    },
-    {
-      id: 4,
-      image: pic4,
-      name: "Denis Denison",
-      status: "complete",
-    },
-    {
-      id: 5,
-      image: pic5,
-      name: "Paul Carter",
-      status: "complete",
-    },
-  ];
 
-  const getUsers = async ()=>{
+  const getUsers = async () => {
     try {
-      const users = await axios.get("/api/getUsers");
-   console.log(users);
+      const employees = await axios.get("/api/getUsers");
+      if (employees) {
+        setEmployees(employees.data);
+      }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  useEffect( () => {
-  getUsers();
-  },[]);
-
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div className="flex flex-col  h-screen">
@@ -79,42 +43,54 @@ function page() {
           <h1 className="font-bold text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
-          <div className="border-2  rounded shadow-lg">
-            {data.map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  className="flex hover:bg-green-50 cursor-pointer justify-between items-center px-3 py-5 border-b"
-                >
-                  <div className="flex items-center gap-3">
-                    <Image
-                      src={item.image}
-                      className="rounded-full w-12 h-12 hidden sm:block"
-                      alt={item.name}
-                    />
-                    <p className="text-gray-600 font-semibold">{item.name}</p>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      setStartQuestions(true);
-                      setUserData(item);
-                    }}
-                    className={clsx({
-                      "bg-green-600 sm:w-[30%] w-[45%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
-                        item.status === "incomplete",
-                      "bg-white border border-gray-400 text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
-                        item.status === "complete",
-                    })}
+          {employees ? (
+            <div className="border-2  rounded shadow-lg">
+              {employees?.map((item) => {
+                return (
+                  <div
+                    key={item._id}
+                    className="flex hover:bg-green-50 cursor-pointer justify-between items-center px-3 py-5 border-b"
                   >
-                    {item.status === "complete"
-                      ? "view submissions"
-                      : " fill out"}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={item.imageUrl}
+                        className="rounded-full w-12 h-12 hidden sm:block"
+                        alt={item.fullname}
+                        width={40}
+                        height={40}
+                      />
+                      <p className="text-gray-600 font-semibold">
+                        {item.fullname}
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setStartQuestions(true);
+                        setUserData(item);
+                      }}
+                      className={clsx({
+                        "bg-green-600 sm:w-[30%] w-[45%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
+                          item.applicationStatus === "incomplete",
+                        "bg-white border border-gray-400 text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
+                          item.applicationStatus === "complete",
+                      })}
+                    >
+                      {item.applicationStatus === "complete"
+                        ? "view submissions"
+                        : " fill out"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div>
+              {[...Array(5)].map((_, index) => (
+                <SkeletonLoader key={index} />
+              ))}
+            </div>
+          )}
         </div>
       )}
       <Footer />
@@ -122,4 +98,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
