@@ -3,10 +3,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { convertImageToBase64 } from "../utils";
 import Link from "next/link";
-
+import Image from "next/image";
+import logo from "../../../public/images/feed.png";
+import { InfinitySpin, Oval } from "react-loader-spinner";
 function Page() {
   const [fullName, setFullName] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
@@ -46,25 +48,27 @@ function Page() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen ">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="border-2 border-green-700 p-5 rounded shadow-lg"
+        className=" p-5 rounded-[12px] shadow-xl w-[350px] bg-white"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Add new employee
-        </h2>
+        <div className="flex justify-center  mb-2">
+          {/* <h1 className="text-gray-500 mb-1">Feedback</h1> */}
+          <Image src={logo} width={110} className="" />
+        </div>
+
+        <p className="font-semibold text-sm text-center text-gray-500 mb-4">
+          Please enter details to add employee
+        </p>
         {message && (
           <div className={`text-green-500 text-center`}>{message}</div>
         )}
         {error && <div className={`text-red-500 text-center`}>{error}</div>}
 
         <div className="mb-4">
-          <label
-            htmlFor="fullName"
-            className="block text-gray-700 font-semibold mb-2"
-          >
-            Full Name
+          <label htmlFor="" className="font-semibold text-sm text-gray-600 ">
+            Full name
           </label>
           <input
             type="text"
@@ -72,15 +76,15 @@ function Page() {
             disabled={loading}
             value={fullName}
             onChange={handleNameChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+            className="outline-none p-3 border  w-full rounded-xl mt-1"
             required
           />
         </div>
 
-        <div className="">
+        <div className="mb-4">
           <label
             htmlFor="image"
-            className="block text-gray-700 font-semibold mb-2"
+            className="font-semibold text-sm text-gray-600 "
           >
             Upload Image
           </label>
@@ -89,24 +93,40 @@ function Page() {
             id="image"
             disabled={loading}
             onChange={handleImageChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+            className="outline-none p-3 border  w-full rounded-xl mt-1"
             accept="image/*"
             required
           />
         </div>
-        <Link
-          href="/"
-          className=" flex justify-center py-4 underline cursor-pointer text-blue-500"
-        >
-          back to login
-        </Link>
+
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-500 text-white font-semibold p-2 rounded-lg hover:bg-indigo-600 transition duration-200"
+          className="flex justify-center mb-4 bg-gradient-to-b from-slate-500 to-black text-white w-full p-2 rounded-xl "
         >
-          {loading ? "...loading" : "Submit"}
+          {loading ? (
+            <div className="flex gap-x-2 justify-center items-center ">
+
+              <Oval
+                visible={true}
+                width="25"
+                 height="30"
+                color="white"
+                ariaLabel="infinity-spin-loading"
+              />
+processing
+            </div>
+          ) : (
+            "Submit"
+          )}
         </button>
+
+        <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
+          Go back to
+          <Link className="m-0  text-gray-800" href="/">
+            Login
+          </Link>
+        </div>
       </form>
     </div>
   );

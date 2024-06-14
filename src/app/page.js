@@ -48,7 +48,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
         // onSubmit={handleSubmit(onSubmit)}
         className=" p-5 rounded-[12px] shadow-xl w-[350px] bg-white"
@@ -147,7 +147,7 @@ export default function Home() {
         <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
           need to add an employee?
           <Link className="m-0  text-gray-800" href="/addusers">
-            click here
+            Click here
           </Link>
         </div>
       </form>
