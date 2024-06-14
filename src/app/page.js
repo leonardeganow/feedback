@@ -6,17 +6,18 @@ import clsx from "clsx";
 import { PASSWORD_REGEXP } from "./constants";
 import { useRouter } from "next/navigation";
 import { Circles } from "react-loader-spinner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFire } from "react-icons/fa";
 import logo from "../../public/images/feed.png";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Home() {
   const [errors, setErrors] = useState();
   const { data: session } = useSession();
 
-  const router = useRouter();
+  const Router = useRouter();
   const defaultFormValues = {
     email: "",
     password: "",
@@ -30,36 +31,23 @@ export default function Home() {
       .matches(PASSWORD_REGEXP, "Wrong password format"),
   });
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register,  formState } = useForm({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
     defaultValues: defaultFormValues,
   });
 
-  const onSubmit = async (values) => {
-    router.push("/home");
 
-    // try {
-    //   const response = await loginUser(values);
-    //   if (response?.data?.token) {
-    //     router.push("/home");
-    //     return;
-    //   }
-    //   reset(values);
-    // } catch (error) {
-    //   if (error?.code === "ERR_NETWORK") {
-    //     setErrors(error?.message);
-    //     return;
-    //   }
-    //   console.log(error);
-    //   setErrors(error?.response?.data?.error);
-    // }
-  };
+  useEffect(() => {
+    if (session) {
+      Router.push("/home");
+    }
+  }, [session, Router]);
 
   if (session) {
-    router.push("/home");
-    return;
+    return null;
   }
+
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-24 shadow-lg">
@@ -117,24 +105,9 @@ export default function Home() {
               </p>
             )}
           </div>
-          {/* <button
-            onClick={() => signIn("github")}
-            type="button"
-            // disabled={formState.isSubmitting}
-            className="bg-green-700 px-5 py-1 text-gray-200 rounded active:bg-green-900"
-          >
-         
-            Sign in with github
-          </button>
-          <button
-            onClick={() => signIn("google")}
-            type="button"
-            // disabled={formState.isSubmitting}
-            className="bg-green-700 px-5 py-1 text-gray-200 rounded active:bg-green-900"
-          >
-         
-            Sign in with google
-          </button> */}
+      
+
+          <Link className=" m-0" href="/addusers">add user?</Link>
 
           <button type="button" onClick={()=>signIn("github")} className="inline-flex hover:bg-gray-100 h-10  items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
             <img

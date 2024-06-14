@@ -1,20 +1,21 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import profilepic from "../../../public/images/profilepic.png";
 import logo from "../../../public/images/feed.png";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 function Navbar() {
   const pathname = usePathname();
   const Router = useRouter();
   const { data: session } = useSession();
 
-  console.log(session);
-
-
+  useEffect(() => {
+    if (!session) {
+      Router.push("/");
+    }
+  }, [session, Router]);
 
   const navOptions = [
     {
@@ -61,29 +62,28 @@ function Navbar() {
           );
         })}
       </div>
-      
-        <div className="text-sm flex items-center gap-3">
-          <Image
-            src={session?.user?.image}
-            alt=""
-            width={30}
-            height={30}
-            className=" rounded-full"
-          />
 
-          <div>
-            <h1 className="text-gray-600">{session?.user?.name}</h1>
-            <button
-              onClick={() => {
-                signOut();
-              }}
-              className="text-red-500  tracking-widest"
-            >
-              <p className="text-[10px] font-bold text-gray-500">LOGOUT</p>
-            </button>
-          </div>
+      <div className="text-sm flex items-center gap-3">
+        <Image
+          src={session?.user?.image}
+          alt=""
+          width={30}
+          height={30}
+          className=" rounded-full"
+        />
+
+        <div>
+          <h1 className="text-gray-600">{session?.user?.name}</h1>
+          <button
+            onClick={() => {
+              signOut();
+            }}
+            className="text-red-500  tracking-widest"
+          >
+            <p className="text-[10px] font-bold text-gray-500">LOGOUT</p>
+          </button>
         </div>
-     
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import QuesionsIndex from "../components/questions/QuestionIndex";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 function page() {
   const [startQuestions, setStartQuestions] = useState(false);
@@ -51,9 +52,19 @@ function page() {
     },
   ];
 
-  if (!session) {
-    Router.push("/");
+  const getUsers = async ()=>{
+    try {
+      const users = await axios.get("/api/getUsers");
+   console.log(users);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  useEffect( () => {
+  getUsers();
+  },[]);
+
 
   return (
     <div className="flex flex-col  h-screen">
