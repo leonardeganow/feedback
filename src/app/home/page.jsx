@@ -27,7 +27,9 @@ function Page() {
       {
         queryKey: ["getemployees", 1],
         queryFn: () => getEmployees(),
-        staleTime: 5000,
+        refetchInterval: 5000, // Fetch data every 5 seconds
+        refetchOnWindowFocus: true, // Refetch on window focus
+        refetchOnMount: true, // Refetch when component mounts
       },
     ],
   });

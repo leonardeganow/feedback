@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/mongodb";
 import EmployeeModel from "@/app/models/employees";
 
+export const dynamic = 'force-dynamic'
 export async function GET() {
   try {
     await connectToDatabase();
