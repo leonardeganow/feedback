@@ -48,14 +48,15 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         // onSubmit={handleSubmit(onSubmit)}
-        className="border-2 border-green-700 p-5 rounded shadow-lg w-[300px]"
+        className=" p-5 rounded-[12px] shadow-xl w-[350px] bg-white"
       >
-        <div className="flex justify-center">
+        <div className="flex justify-center  mb-2">
           {/* <h1 className="text-gray-500 mb-1">Feedback</h1> */}
-          <Image src={logo} width={150} className="" />
+          <Image src={logo} width={110} className="" />
+
           {errors && (
             <div className="flex items-center justify-center gap-2 bg-red-500 text-xs p-1 text-red-100 border-4 border-red-200 rounded">
               <FaFire size={20} />
@@ -63,17 +64,48 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className="mb-6">
+        <p className="text-center font-bold text-xl mb-2">Welcome Back</p>
+        <p className="font-semibold text-sm text-center text-gray-500 mb-4">
+          Please enter your details to continue
+        </p>
+        <div className="flex justify-center mb-6 gap-x-5">
+          <button
+            type="button"
+            onClick={() => signIn("github")}
+            className="border border-gray-100 shadow rounded-xl hover:bg-gray-50  py-2 px-8 cursor-pointer"
+          >
+            <img
+              src="https://www.svgrepo.com/show/512317/github-142.svg"
+              alt="GitHub"
+              className="h-[18px] w-[18px] "
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => signIn("google")}
+            className="border border-gray-100 shadow rounded-xl hover:bg-gray-50  py-2 px-8 cursor-pointer"
+          >
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="h-[18px] w-[18px] "
+            />
+          </button>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="" className="font-semibold text-sm text-gray-600 ">
+            Email
+          </label>
           <input
             type="text"
             className={clsx({
-              "outline-none p-3 border  w-full rounded": true,
+              "outline-none p-3 border  w-full rounded-xl mt-1": true,
               "border-green-500 border-2":
                 formState.dirtyFields?.email &&
                 !!!formState.errors?.email === true,
               "border-red-500 border-2": !!formState.errors?.email === true,
             })}
-            placeholder="enter your email"
+            placeholder="johndoe@gmail.com"
             {...register("email")}
           />
           {formState.errors.email && (
@@ -82,17 +114,21 @@ export default function Home() {
             </p>
           )}
         </div>
-        <div className="mb-2">
+        <div className="mb-6">
+          <label htmlFor="" className="font-semibold text-sm text-gray-600 ">
+            Password
+          </label>
+
           <input
             type="password"
             className={clsx({
-              "outline-none p-3 border  w-full rounded": true,
+              "outline-none p-3 border  w-full rounded-xl mt-1": true,
               "border-green-500 border-2":
                 formState.dirtyFields?.password &&
                 !!!formState.errors?.password === true,
               "border-red-500 border-2": !!formState.errors?.password === true,
             })}
-            placeholder="*******"
+            placeholder="Enter your password"
             {...register("password")}
           />
           {formState.errors.password && (
@@ -102,36 +138,17 @@ export default function Home() {
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-y-3">
-          <Link className="m-0 underline text-blue-500" href="/addusers">
-            add user?
+        <div className="mb-2">
+          <button className="bg-gradient-to-b from-slate-500 to-black text-white w-full p-2 rounded-xl ">
+            Login
+          </button>
+        </div>
+
+        <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
+          need to add an employee?
+          <Link className="m-0  text-gray-800" href="/addusers">
+            click here
           </Link>
-
-          <button
-            type="button"
-            onClick={() => signIn("github")}
-            className="flex hover:bg-gray-100 h-10  items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            <img
-              src="https://www.svgrepo.com/show/512317/github-142.svg"
-              alt="GitHub"
-              className="h-[18px] w-[18px] "
-            />
-            Log in with GitHub
-          </button>
-
-          <button
-            type="button"
-            onClick={() => signIn("google")}
-            className="hover:bg-gray-100 flex h-10  items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
-              className="h-[18px] w-[18px] "
-            />
-            Log in with Google
-          </button>
         </div>
       </form>
     </div>
