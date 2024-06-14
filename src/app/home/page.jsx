@@ -5,36 +5,42 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import QuesionsIndex from "../components/questions/QuestionIndex";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import SkeletonLoader from "./SkeletonLoader";
+import { useQueries } from "@tanstack/react-query";
 
 function Page() {
   const [startQuestions, setStartQuestions] = useState(false);
-  const [employees, setEmployees] = useState(false);
-  const { data: session } = useSession();
   const [userData, setUserData] = useState();
 
-  const getUsers = async () => {
+  const getEmployees = async () => {
     try {
       const employees = await axios.get("/api/getUsers");
-      if (employees) {
-        setEmployees(employees.data);
-      }
+      return employees.data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const [employees] = useQueries({
+    queries: [
+      {
+        queryKey: ["getemployees", 1],
+        queryFn: () => getEmployees(),
+        staleTime: 5000,
+      },
+    ],
+  });
+
+
+
 
   return (
-    <div className="flex flex-col  h-screen">
+    <div className="flex flex-col ">
       <Navbar />
       {startQuestions ? (
         <QuesionsIndex
+          employees={employees.data}
           setStartQuestions={setStartQuestions}
           userData={userData}
         />
@@ -43,9 +49,9 @@ function Page() {
           <h1 className="font-bold text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
-          {employees ? (
+          {employees.data ? (
             <div className="border-2  rounded shadow-lg">
-              {employees?.map((item) => {
+              {employees.data?.map((item) => {
                 return (
                   <div
                     key={item._id}

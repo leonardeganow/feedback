@@ -8,15 +8,7 @@ import { useSession, signOut } from "next-auth/react";
 
 function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const { data: session } = useSession();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!session && !isLoading) {
-      router.push("/");
-    }
-  }, [session, isLoading, router]);
 
   const navOptions = [
     {
@@ -40,14 +32,11 @@ function Navbar() {
   ];
 
   const handleSignOut = async () => {
-    setIsLoading(true);
-    await signOut({ redirect: false });
-    router.push("/");
-    setIsLoading(false);
+    await signOut({ callbackUrl: "/" });
   };
 
   return (
-    <div className="h-[7vh] flex justify-between items-center sm:px-20 px-5 bg-gray-100">
+    <div className="h-[7h] flex justify-between items-center sm:px-20 px-5 bg-gray-100">
       <Link href="/test">
         <Image src={logo} width={150} height={50} alt="logo" priority />
       </Link>
@@ -57,7 +46,7 @@ function Navbar() {
             key={option.id}
             className={`relative font-semibold text-gray-700 cursor-pointer hover:border-b-2 hover:border-green-600 ${
               pathname === option.href ? "border-b-2 border-green-600" : ""
-            } h-[7vh] flex items-center px-5`}
+            } h-[10vh] flex items-center px-5`}
           >
             <Link href={option.href}>{option.title}</Link>
             {option.notifications && (

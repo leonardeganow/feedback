@@ -14,19 +14,26 @@ function Two(props) {
             {props.data.title}
           </h1>
           <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
-            share your feedback for {props.userData.name}
+            share your feedback for {props.userData.fullnamae}
           </p>
         </div>
 
         <Image
-          src={props.userData.image}
+          src={props.userData.imageUrl}
           alt="profile pic"
-          className="rounded-full w-12 h-12"
+          className="rounded-full w-12 h-12  sm:block"
+          width={40}
+          height={40}
         />
       </div>
 
       <div className="border-r-2 border-t-2 border-l-2  flex flex-col justify-center  p-3">
-        <Ratings setRatings={setRatings} ratings={ratings} setValue={props.useFormHandler.setValue} name={"answerTwo"} />
+        <Ratings
+          setRatings={setRatings}
+          ratings={ratings}
+          setValue={props.useFormHandler.setValue}
+          name={"answerTwo"}
+        />
         <div className="text-center pt-4 text-gray-700 font-bold">
           {ratings}/10
         </div>

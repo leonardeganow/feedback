@@ -68,7 +68,7 @@ function QuesionsIndex(props) {
           />
         );
       default:
-        return <Four />;
+        return <Four employees={props.employees}/>;
     }
   };
   return (

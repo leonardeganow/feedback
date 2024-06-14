@@ -3,7 +3,6 @@ import Image from "next/image";
 import React from "react";
 
 function One(props) {
-
   return (
     <div className="">
       <div className="flex justify-between mb-5">
@@ -12,14 +11,16 @@ function One(props) {
             {props.data.title}
           </h1>
           <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
-            share your feedback for {props.userData.name}
+            share your feedback for {props.userData.fullname}
           </p>
         </div>
 
         <Image
-          src={props.userData.image}
+          src={props.userData.imageUrl}
+          className="rounded-full w-12 h-12  sm:block"
           alt="profile pic"
-          className="rounded-full w-12 h-12"
+          width={40}
+          height={40}
         />
       </div>
       <div className="border-r-2 border-t-2 border-l-2 mt-4 p-5">
