@@ -17,7 +17,7 @@ function One(props) {
 
         <Image
           src={props.userData.imageUrl}
-          className="rounded-full w-12 h-12  sm:block"
+          className="rounded-full w-12 h-12  sm:block hidden"
           alt="profile pic"
           width={40}
           height={40}

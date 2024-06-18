@@ -6,9 +6,9 @@ import Footer from "../components/Footer";
 function Page() {
   const [feedbacks, setFeedbacks] = useState();
   return (
-    <div className="flex flex-col items-between  h-screen">
+    <div >
       <Navbar />
-      <div className="  sm:w-[50%] w-[95%]  mx-auto  min-h-[88vh] pt-14">
+      <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88vh] overflow-scroll flex flex-col justify-center">
         {feedbacks ? (
           <div>
             <h1 className="font-bold text-xl mb-5 text-gray-700">

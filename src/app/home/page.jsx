@@ -38,7 +38,7 @@ function Page() {
 
 
   return (
-    <div className="flex flex-col ">
+    <div className="">
       <Navbar />
       {startQuestions ? (
         <QuesionsIndex
@@ -47,12 +47,12 @@ function Page() {
           userData={userData}
         />
       ) : (
-        <div className="  sm:w-[50%] w-[95%]  mx-auto  min-h-[88vh] pt-14">
+        <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88vh] overflow-scroll flex flex-col justify-center">
           <h1 className="font-bold text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
           {employees.data ? (
-            <div className="border-2  rounded shadow-lg">
+            <div className="border-2  rounded shadow-lg min-h-auto overflow-scroll">
               {employees.data?.map((item) => {
                 return (
                   <div
