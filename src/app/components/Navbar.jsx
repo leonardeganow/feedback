@@ -190,9 +190,9 @@ function Navbar() {
           {navOptions.map((option) => (
             <div
               key={option.id}
-              className={`relative font-semibold text-gray-700 cursor-pointer hover:border-b-2 hover:border-green-600 ${
+              className={`relative font-semibold text-gray-700 cursor-pointer text-sm hover:border-b-2 hover:border-green-600 ${
                 pathname === option.href ? "border-b-2 border-green-600" : ""
-              } h-[7vh] flex items-center px-5`}
+              } h-[5vh] flex items-center px-5`}
             >
               <Link href={option.href}>{option.title}</Link>
               {option.notifications && (
@@ -207,13 +207,13 @@ function Navbar() {
               <Image
                 src={session.user.image}
                 alt=""
-                width={30}
-                height={30}
+                width={25}
+                height={25}
                 className="rounded-full"
               />
             )}
             <div>
-              <h1 className="text-gray-600">{session?.user?.name}</h1>
+              <h1 className="text-gray-600 text-sm">{session?.user?.name}</h1>
               <button
                 onClick={handleSignOut}
                 className="text-red-500 tracking-widest"

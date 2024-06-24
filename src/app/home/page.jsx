@@ -45,11 +45,11 @@ function Page() {
         />
       ) : (
         <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88dvh]  flex flex-col justify-center">
-          <h1 className="font-bold text-xl mb-5 text-gray-700">
+          <h1 className="font-bold sm:text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
           {employees.data ? (
-            <div className="border-2  rounded shadow-lg overflow-scroll h-[65dvh] sm:h-auto ">
+            <div className="border-2  rounded shadow-lg overflow-scroll h-[57dvh] sm:h-auto ">
               {employees.data?.map((item) => {
                 return (
                   <div

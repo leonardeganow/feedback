@@ -8,9 +8,9 @@ function Two(props) {
 
   return (
     <div>
-      <div className="flex justify-between mb-5">
+      <div className="flex justify-between mb-2">
         <div>
-          <h1 className="sm:text-lg text-gray-700 font-semibold pb-3">
+          <h1 className="text-sm sm:text-lg text-gray-700 font-semibold pb-1">
             {props.data.title}
           </h1>
           <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
@@ -21,7 +21,7 @@ function Two(props) {
         <Image
           src={props.userData.imageUrl}
           alt="profile pic"
-          className="rounded-full w-12 h-12  sm:block"
+          className="rounded-full w-12 h-12  sm:block hidden"
           width={40}
           height={40}
         />

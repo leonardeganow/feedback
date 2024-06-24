@@ -84,8 +84,8 @@ function QuesionsIndex(props) {
 
       {renderForm()}
       {currentStep !== 4 && (
-        <div className="  border-l-2 border-b-2 border-r-2  p-5">
-          <div className="pt-3">
+        <div className="  border-l-2 border-b-2 border-r-2  p-5 ">
+          <div className="">
             <div className="w-full mt-4 bg-gray-200 rounded-full h-2 dark:bg-gray-400">
               <div
                 className="bg-gradient-to-r from-green-400 to-teal-500 h-2 rounded-full"

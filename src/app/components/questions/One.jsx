@@ -5,9 +5,9 @@ import React from "react";
 function One(props) {
   return (
     <div className="">
-      <div className="flex justify-between mb-5">
+      <div className="flex justify-between mb-2">
         <div>
-          <h1 className="sm:text-lg text-gray-700 font-semibold pb-3">
+          <h1 className="text-sm sm:text-lg text-gray-700 font-semibold pb-1">
             {props.data.title}
           </h1>
           <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
@@ -23,8 +23,8 @@ function One(props) {
           height={40}
         />
       </div>
-      <div className="border-r-2 border-t-2 border-l-2 mt-4 p-5">
-        <div className="flex flex-col gap-5">
+      <div className="border-r-2 border-t-2 border-l-2 mt-2 px-5 py-2">
+        <div className="flex flex-col gap-2">
           {props.data.answers.map((item) => {
             return (
               <div
@@ -38,7 +38,7 @@ function One(props) {
                     props.useFormHandler.watch("answerOne") === item.title,
                 })}
               >
-                <h1 className="font-bold  ">{item.title}</h1>
+                <h1 className="font-bold text-sm sm:text-md ">{item.title}</h1>
                 <p className="text-sm sm:text-md  font-light">{item.body}</p>
               </div>
             );

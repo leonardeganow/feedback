@@ -5,9 +5,9 @@ import React from "react";
 function Third(props) {
   return (
     <div className="">
-      <div className="flex justify-between mb-5">
+      <div className="flex justify-between mb-2">
         <div>
-          <h1 className="sm:text-lg text-gray-700 font-semibold pb-3">
+          <h1 className="text-sm sm:text-lg text-gray-700 font-semibold pb-1">
             {props.data.title}
           </h1>
           <p className="text-[#ACB1B6] font-semibold tracking-[4px] sm:text-xs text-[10px]  uppercase">
@@ -18,7 +18,7 @@ function Third(props) {
         <Image
           src={props.userData.imageUrl}
           alt="profile pic"
-          className="rounded-full w-12 h-12  sm:block"
+          className="rounded-full w-12 h-12  sm:block hidden"
           width={40}
           height={40}
         />
@@ -29,7 +29,7 @@ function Third(props) {
           className="resize-none rounded-md border w-full outline-none p-2 h-[20vh]"
           placeholder="Say something"
         ></textarea>
-        <div className="flex justify-between text-xs capitalize pt-3 ">
+        <div className="flex justify-between text-xs capitalize pt-2 ">
           <button
             onClick={props.handleBack}
             className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
