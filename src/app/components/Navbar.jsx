@@ -84,7 +84,6 @@
 
 // export default Navbar;
 
-
 "use client";
 import Image from "next/image";
 import Link from "next/link";
@@ -126,9 +125,9 @@ function Navbar() {
   };
 
   return (
-    <div className="h-[7vh] flex justify-between items-center relative z-20 sm:px-20 px-5 bg-gray-100">
+    <div className="h-[7dvh] flex justify-between items-center relative z-20 sm:px-20 px-5 bg-gray-100">
       <Link href="/test">
-        <Image src={logo} width={120} height={50} alt="logo" priority />
+        <Image src={logo} width={80} height={50} alt="logo" priority />
       </Link>
       <div className="hidden sm:flex gap-16">
         {navOptions.map((option) => (

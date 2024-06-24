@@ -72,7 +72,7 @@ function QuesionsIndex(props) {
     }
   };
   return (
-    <div className=" sm:w-[50%] w-[90%]  mx-auto  min-h-[88vh]  py-10 sm:pt-14">
+    <div className=" sm:w-[50%] w-[90%]  mx-auto  min-h-[88dvh]  py-10 sm:pt-14">
       {currentStep !== 4 && (
         <h1
           onClick={() => props.setStartQuestions(false)}

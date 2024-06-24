@@ -34,9 +34,6 @@ function Page() {
     ],
   });
 
-
-
-
   return (
     <div className="">
       <Navbar />
@@ -47,12 +44,12 @@ function Page() {
           userData={userData}
         />
       ) : (
-        <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88vh] overflow-scroll flex flex-col justify-center">
+        <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88dvh]  flex flex-col justify-center">
           <h1 className="font-bold text-xl mb-5 text-gray-700">
             Share Feedback
           </h1>
           {employees.data ? (
-            <div className="border-2  rounded shadow-lg min-h-auto overflow-scroll">
+            <div className="border-2  rounded shadow-lg overflow-scroll h-[65dvh] sm:h-auto ">
               {employees.data?.map((item) => {
                 return (
                   <div
@@ -78,9 +75,9 @@ function Page() {
                         setUserData(item);
                       }}
                       className={clsx({
-                        "bg-green-600 sm:w-[30%] w-[45%] py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
+                        "bg-green-600 sm:w-[30%] w-[45%] py-1 text-xs sm:text-base text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
                           item.applicationStatus === "incomplete",
-                        "bg-white border border-gray-400 text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
+                        "bg-white border border-gray-400 text-xs sm:text-base text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
                           item.applicationStatus === "complete",
                       })}
                     >
