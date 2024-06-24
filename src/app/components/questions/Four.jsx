@@ -4,8 +4,8 @@ import Image from "next/image";
 function Four(props) {
   return (
     <div>
-      <h1 className="font-bold text-2xl">
-        Thnak you for sharing your feedback!
+      <h1 className="font-bold sm:text-2xl">
+        Thank you for sharing your feedback!
       </h1>
       <p className="text-gray-500 py-3">
         Continue to give feedback to other team members.
@@ -27,7 +27,7 @@ function Four(props) {
                     width={40}
                     height={40}
                   />
-                  <p className="text-gray-600 font-semibold">{item.fullname}</p>
+                  <p className="text-gray-600 font-semibold text-sm sm:text-base">{item.fullname}</p>
                 </div>
 
                 <button
@@ -35,7 +35,7 @@ function Four(props) {
                     //   setStartQuestions(true);
                     //   setUserData(item);
                   }}
-                  className="bg-green-700 px-10 py-1  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointer"
+                  className="bg-green-700 px-10 py-1 text-sm sm:text-base  text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointer"
                 >
                   fill out
                 </button>

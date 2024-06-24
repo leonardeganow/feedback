@@ -12,6 +12,7 @@ import logo from "../../public/images/feed.png";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function Home() {
   const [errors, setErrors] = useState();
@@ -31,7 +32,7 @@ export default function Home() {
       .matches(PASSWORD_REGEXP, "Wrong password format"),
   });
 
-  const { register, formState } = useForm({
+  const { register, formState, handleSubmit } = useForm({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
     defaultValues: defaultFormValues,
@@ -47,22 +48,35 @@ export default function Home() {
     return null;
   }
 
+  const onSubmit = async (values) => {
+    try {
+      const { email, password } = values;
+      const response = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (!response.error) {
+        Router.push("/home");
+      } else {
+        // handle error
+        toast.error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-[100dvh] bg-gray-100">
       <form
-        // onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         className=" p-5 rounded-[12px] shadow-xl w-[350px] bg-white"
       >
         <div className="flex justify-center  mb-2">
           {/* <h1 className="text-gray-500 mb-1">Feedback</h1> */}
           <Image src={logo} width={110} className="" />
-
-          {errors && (
-            <div className="flex items-center justify-center gap-2 bg-red-500 text-xs p-1 text-red-100 border-4 border-red-200 rounded">
-              <FaFire size={20} />
-              {errors}
-            </div>
-          )}
         </div>
         <p className="text-center font-bold text-xl mb-2">Welcome Back</p>
         <p className="font-semibold text-sm text-center text-gray-500 mb-4">
@@ -143,6 +157,7 @@ export default function Home() {
             Login
           </button>
         </div>
+    
 
         <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
           need to add an employee?
@@ -150,6 +165,14 @@ export default function Home() {
             Click here
           </Link>
         </div>
+        <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
+         
+          <Link className="m-0  text-gray-800" href="/createuser">
+            Add user
+          </Link>
+        
+        </div>
+         
       </form>
     </div>
   );

@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import One from "./One";
 import Two from "./Two";
 import { IoChevronBack } from "react-icons/io5";
-import { questions } from "@/app/api";
 import Third from "./Third";
 import Four from "./Four";
 import { useForm } from "react-hook-form";
 import { defaultFormValues } from "./defaultFormValues";
-import clsx from "clsx";
 
 function QuesionsIndex(props) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -35,7 +33,7 @@ function QuesionsIndex(props) {
         return (
           <One
             userData={props.userData}
-            data={questions[0]}
+            data={props.questions[0]}
             useFormHandler={useFormHandler}
             setSelected={setSelected}
             handleBack={handleBack}
@@ -47,7 +45,7 @@ function QuesionsIndex(props) {
         return (
           <Two
             userData={props.userData}
-            data={questions[1]}
+            data={props.questions[1]}
             useFormHandler={useFormHandler}
             setSelected={setSelected}
             handleBack={handleBack}
@@ -59,7 +57,7 @@ function QuesionsIndex(props) {
         return (
           <Third
             userData={props.userData}
-            data={questions[2]}
+            data={props.questions[2]}
             useFormHandler={useFormHandler}
             setSelected={setSelected}
             handleBack={handleBack}
@@ -89,7 +87,7 @@ function QuesionsIndex(props) {
             <div className="w-full mt-4 bg-gray-200 rounded-full h-2 dark:bg-gray-400">
               <div
                 className="bg-gradient-to-r from-green-400 to-teal-500 h-2 rounded-full"
-                style={{ width: `${(currentStep / questions.length) * 100}%` }}
+                style={{ width: `${(currentStep / props.questions.length) * 100}%` }}
               ></div>
             </div>
 
@@ -97,7 +95,7 @@ function QuesionsIndex(props) {
               Questions completed
             </h1>
             <p className="text-xs pt-3">
-              {currentStep}/{questions.length}
+              {currentStep}/{props.questions.length}
             </p>
           </div>
         </div>

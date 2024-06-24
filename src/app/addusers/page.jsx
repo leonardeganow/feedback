@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/images/feed.png";
 import { InfinitySpin, Oval } from "react-loader-spinner";
+import { toast } from "sonner";
 function Page() {
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ function Page() {
         },
       });
       if (response) {
-        setMessage(response.data.message);
+        toast.success(response.data.message);
         setLoading(false);
         setError("");
         setFullName("");
@@ -42,13 +43,15 @@ function Page() {
       }
     } catch (error) {
       setLoading(false);
+      toast.error(error.response.data);
+
       setError(error.response.data);
       console.log(error);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-[100dvh] bg-gray-100">
       <form
         onSubmit={handleSubmit}
         className=" p-5 rounded-[12px] shadow-xl w-[350px] bg-white"

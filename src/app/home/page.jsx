@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
@@ -21,12 +21,27 @@ function Page() {
       console.error(error);
     }
   };
+  const getQuestions = async () => {
+    try {
+      const questions = await axios.get("/api/questions");
+      return questions.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const [employees] = useQueries({
+  const [employees,questions] = useQueries({
     queries: [
       {
         queryKey: ["getemployees", 1],
         queryFn: () => getEmployees(),
+        refetchInterval: 5000, // Fetch data every 5 seconds
+        refetchOnWindowFocus: true, // Refetch on window focus
+        refetchOnMount: true, // Refetch when component mounts
+      },
+      {
+        queryKey: ["getquestions", 1],
+        queryFn: () => getQuestions(),
         refetchInterval: 5000, // Fetch data every 5 seconds
         refetchOnWindowFocus: true, // Refetch on window focus
         refetchOnMount: true, // Refetch when component mounts
@@ -42,6 +57,7 @@ function Page() {
           employees={employees.data}
           setStartQuestions={setStartQuestions}
           userData={userData}
+          questions={questions.data}
         />
       ) : (
         <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88dvh]  flex flex-col justify-center">
