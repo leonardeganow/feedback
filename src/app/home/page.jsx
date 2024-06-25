@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
@@ -8,10 +8,34 @@ import clsx from "clsx";
 import axios from "axios";
 import SkeletonLoader from "./SkeletonLoader";
 import { useQueries } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useSession } from "next-auth/react";
 
 function Page() {
+  const { data: session } = useSession();
+
   const [startQuestions, setStartQuestions] = useState(false);
   const [userData, setUserData] = useState();
+  const answerData = {
+    userId: "",
+    employeeId: "",
+    question1: {
+      id: "",
+      answer: "",
+    },
+    question2: {
+      id: "",
+      answer: "",
+    },
+    question3: {
+      id: "",
+      answer: "",
+    },
+  };
+
+  const answerFormHandler = useForm({
+    defaultValues: answerData,
+  });
 
   const getEmployees = async () => {
     try {
@@ -30,7 +54,7 @@ function Page() {
     }
   };
 
-  const [employees,questions] = useQueries({
+  const [employees, questions] = useQueries({
     queries: [
       {
         queryKey: ["getemployees", 1],
@@ -58,6 +82,7 @@ function Page() {
           setStartQuestions={setStartQuestions}
           userData={userData}
           questions={questions.data}
+          answerFormHandler={answerFormHandler}
         />
       ) : (
         <div className="  sm:w-[50%] w-[90%]  mx-auto  h-[88dvh]  flex flex-col justify-center">
@@ -73,7 +98,7 @@ function Page() {
                     className="flex hover:bg-green-50 cursor-pointer justify-between items-center px-3 py-5 border-b"
                   >
                     <div className="flex items-center gap-3">
-                      <Image
+                      <img
                         src={item.imageUrl}
                         className="rounded-full w-12 h-12 hidden sm:block"
                         alt={item.fullname}
@@ -89,6 +114,8 @@ function Page() {
                       onClick={() => {
                         setStartQuestions(true);
                         setUserData(item);
+                        answerFormHandler.setValue("employeeId", item._id);
+                        answerFormHandler.setValue("userId", session.user.id);
                       }}
                       className={clsx({
                         "bg-green-600 sm:w-[30%] w-[45%] py-1 text-xs sm:text-base text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":

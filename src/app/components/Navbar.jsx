@@ -99,8 +99,6 @@ function Navbar() {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  console.log(session);
-
   const navOptions = [
     {
       title: "Share feedback",
@@ -163,17 +161,23 @@ function Navbar() {
       </div>
 
       <div className="hidden sm:flex text-sm items-center gap-3">
-        {session?.user?.image || session?.user?.imageUrl && (
-          <Image
-            src={session.user.image || session.user.imageUrl}
-            alt=""
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-        )}
+        {session?.user?.image ||
+          (session?.user?.imageUrl && (
+            <img
+              src={session.user.image || session.user.imageUrl}
+              alt=""
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          ))}
         <div>
-          <h1 className="text-gray-600">{session?.user?.name || session?.user?.fullname}</h1>
+          <h1 className="text-gray-600">
+            {session?.user?.name || session?.user?.fullname}
+          </h1>
           <button
             onClick={handleSignOut}
             className="text-red-500 tracking-widest"
@@ -215,7 +219,9 @@ function Navbar() {
               />
             )}
             <div>
-              <h1 className="text-gray-600 text-sm">{session?.user?.name}</h1>
+              <h1 className="text-gray-600 text-sm">
+                {session?.user?.name || session?.user?.fullname}
+              </h1>
               <button
                 onClick={handleSignOut}
                 className="text-red-500 tracking-widest"

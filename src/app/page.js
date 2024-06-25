@@ -5,7 +5,7 @@ import * as yup from "yup";
 import clsx from "clsx";
 import { PASSWORD_REGEXP } from "./constants";
 import { useRouter } from "next/navigation";
-import { Circles } from "react-loader-spinner";
+import { Circles, Oval } from "react-loader-spinner";
 import { useEffect, useState } from "react";
 import { FaFire } from "react-icons/fa";
 import logo from "../../public/images/feed.png";
@@ -67,6 +67,7 @@ export default function Home() {
       console.log(error);
     }
   };
+
 
   return (
     <div className="flex justify-center items-center h-[100dvh] bg-gray-100">
@@ -154,10 +155,21 @@ export default function Home() {
 
         <div className="mb-2">
           <button className="bg-gradient-to-b from-slate-500 to-black text-white w-full p-2 rounded-xl ">
-            Login
+            {formState.isSubmitting ? (
+              <div className="flex justify-center items-center">
+                <Oval
+                  visible={true}
+                  width="25"
+                  height="30"
+                  color="white"
+                  ariaLabel="infinity-spin-loading"
+                />
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
-    
 
         <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
           need to add an employee?
@@ -166,13 +178,10 @@ export default function Home() {
           </Link>
         </div>
         <div className="flex justify-center gap-1 text-xs font-semibold text-gray-400">
-         
           <Link className="m-0  text-gray-800" href="/createuser">
             Add user
           </Link>
-        
         </div>
-         
       </form>
     </div>
   );

@@ -1,8 +1,13 @@
 import clsx from "clsx";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 function One(props) {
+
+  useEffect(() => {
+    props.answerFormHandler.setValue("question1.id", props.data._id);
+  }, []);
+
   return (
     <div className="">
       <div className="flex justify-between mb-2">
@@ -15,7 +20,7 @@ function One(props) {
           </p>
         </div>
 
-        <Image
+        <img
           src={props.userData.imageUrl}
           className="rounded-full w-12 h-12  sm:block hidden"
           alt="profile pic"
@@ -31,6 +36,7 @@ function One(props) {
                 key={item.id}
                 onClick={() => {
                   props.useFormHandler.setValue("answerOne", item.title);
+                  props.answerFormHandler.setValue("question1.answer", item.title)
                 }}
                 className={clsx({
                   "bg-gray-100 cursor-pointer p-3 font-medium hover:bg-gray-500 hover:text-white": true,

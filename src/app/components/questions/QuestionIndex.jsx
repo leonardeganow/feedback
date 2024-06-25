@@ -27,6 +27,7 @@ function QuesionsIndex(props) {
     setCurrentStep((prev) => prev - 1);
   };
 
+
   const renderForm = () => {
     switch (currentStep) {
       case 1:
@@ -39,6 +40,7 @@ function QuesionsIndex(props) {
             handleBack={handleBack}
             handleNext={handleNext}
             currentStep={currentStep}
+            answerFormHandler={props.answerFormHandler}
           />
         );
       case 2:
@@ -51,6 +53,7 @@ function QuesionsIndex(props) {
             handleBack={handleBack}
             handleNext={handleNext}
             currentStep={currentStep}
+            answerFormHandler={props.answerFormHandler}
           />
         );
       case 3:
@@ -63,6 +66,7 @@ function QuesionsIndex(props) {
             handleBack={handleBack}
             handleNext={handleNext}
             currentStep={currentStep}
+            answerFormHandler={props.answerFormHandler}
           />
         );
       default:

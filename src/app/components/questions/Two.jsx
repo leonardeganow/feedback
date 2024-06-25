@@ -1,10 +1,15 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Ratings from "../Ratings";
 import clsx from "clsx";
 
 function Two(props) {
   const [ratings, setRatings] = useState(0);
+
+  useEffect(() => {
+    props.answerFormHandler.setValue("question2.id", props.data._id);
+    props.answerFormHandler.setValue("question2.answer", ratings.toString());
+  }, [ratings]);
 
   return (
     <div>
@@ -18,7 +23,7 @@ function Two(props) {
           </p>
         </div>
 
-        <Image
+        <img
           src={props.userData.imageUrl}
           alt="profile pic"
           className="rounded-full w-12 h-12  sm:block hidden"

@@ -10,13 +10,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// export const config = {
-//   api: {
-//     bodyParser: {
-//       sizeLimit: "10mb", // Set desired value here
-//     },
-//   },
-// };
+
 
 export async function POST(request) {
   try {

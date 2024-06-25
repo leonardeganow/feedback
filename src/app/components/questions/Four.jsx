@@ -20,7 +20,7 @@ function Four(props) {
                 className="flex hover:bg-sky-100 cursor-pointer justify-between items-center px-3 py-5 border-b"
               >
                 <div className="flex items-center gap-3">
-                  <Image
+                  <img
                     src={item.imageUrl}
                     className="rounded-full w-12 h-12"
                     alt={item.fullname}

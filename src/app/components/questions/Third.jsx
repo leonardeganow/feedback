@@ -1,8 +1,34 @@
+import axios from "axios";
 import clsx from "clsx";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { toast } from "sonner";
 
 function Third(props) {
+
+const postAnswer = async ()=>{
+  const data = props.answerFormHandler.getValues()
+
+  try {
+    const response = await axios.post('/api/postanswer', data)
+    if(response){
+      toast(response.data.message)
+      props.handleNext()
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+
+  useEffect(() => {
+    props.answerFormHandler.setValue("question3.id", props.data._id);
+    props.answerFormHandler.setValue(
+      "question3.answer",
+      props.useFormHandler.watch("answerThree")
+    );
+  }, [props.useFormHandler.watch("answerThree")]);
   return (
     <div className="">
       <div className="flex justify-between mb-2">
@@ -15,7 +41,7 @@ function Third(props) {
           </p>
         </div>
 
-        <Image
+        <img
           src={props.userData.imageUrl}
           alt="profile pic"
           className="rounded-full w-12 h-12  sm:block hidden"
@@ -38,7 +64,7 @@ function Third(props) {
           </button>
 
           <button
-            onClick={props.handleNext}
+            onClick={postAnswer}
             disabled={props.useFormHandler.watch("answerThree") === ""}
             className={clsx({
               "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
