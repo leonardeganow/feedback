@@ -12,8 +12,9 @@ const postAnswer = async ()=>{
   try {
     const response = await axios.post('/api/postanswer', data)
     if(response){
+      props.answerFormHandler.reset()
       toast(response.data.message)
-      props.handleNext()
+      props.handleNext(1)
     }
   } catch (error) {
     console.error(error);
@@ -26,9 +27,9 @@ const postAnswer = async ()=>{
     props.answerFormHandler.setValue("question3.id", props.data._id);
     props.answerFormHandler.setValue(
       "question3.answer",
-      props.useFormHandler.watch("answerThree")
+      props.answerFormHandler.watch("question3.answer")
     );
-  }, [props.useFormHandler.watch("answerThree")]);
+  }, [props.answerFormHandler.watch("question3.answer")]);
   return (
     <div className="">
       <div className="flex justify-between mb-2">
@@ -51,13 +52,13 @@ const postAnswer = async ()=>{
       </div>
       <div className="border-r-2 border-t-2 border-l-2 mt-4 p-5">
         <textarea
-          {...props.useFormHandler.register("answerThree")}
+          {...props.answerFormHandler.register("question3.answer")}
           className="resize-none rounded-md border w-full outline-none p-2 h-[20vh]"
           placeholder="Say something"
         ></textarea>
         <div className="flex justify-between text-xs capitalize pt-2 ">
           <button
-            onClick={props.handleBack}
+            onClick={()=> props.handleBack(1)}
             className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
           >
             previous
@@ -65,12 +66,12 @@ const postAnswer = async ()=>{
 
           <button
             onClick={postAnswer}
-            disabled={props.useFormHandler.watch("answerThree") === ""}
+            disabled={props.answerFormHandler.watch("question3.answer") === ""}
             className={clsx({
               "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerThree"),
+              props.answerFormHandler.watch("question3.answer"),
               "bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerThree") === "",
+              props.answerFormHandler.watch("question3.answer") === "",
             })}
           >
             {props.currentStep === 3 ? "submit" : "next"}

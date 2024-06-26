@@ -16,17 +16,16 @@ function QuesionsIndex(props) {
     defaultValues: defaultFormValues,
   });
 
-  const handleNext = () => {
-    setCurrentStep((prev) => prev + 1);
+  const handleNext = (item) => {
+    setCurrentStep((prev) => prev + item);
   };
 
-  const handleBack = () => {
+  const handleBack = (item) => {
     if (currentStep <= 1) {
       return;
     }
-    setCurrentStep((prev) => prev - 1);
+    setCurrentStep((prev) => prev - item);
   };
-
 
   const renderForm = () => {
     switch (currentStep) {
@@ -70,7 +69,16 @@ function QuesionsIndex(props) {
           />
         );
       default:
-        return <Four employees={props.employees}/>;
+        return (
+          <Four
+            employees={props.employees}
+            handleBack={handleBack}
+            setStartQuestions={props.setStartQuestions}
+            setUserData={props.setUserData}
+            answerFormHandler={props.answerFormHandler}
+
+          />
+        );
     }
   };
   return (
@@ -91,7 +99,9 @@ function QuesionsIndex(props) {
             <div className="w-full mt-4 bg-gray-200 rounded-full h-2 dark:bg-gray-400">
               <div
                 className="bg-gradient-to-r from-green-400 to-teal-500 h-2 rounded-full"
-                style={{ width: `${(currentStep / props.questions.length) * 100}%` }}
+                style={{
+                  width: `${(currentStep / props.questions.length) * 100}%`,
+                }}
               ></div>
             </div>
 

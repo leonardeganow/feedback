@@ -36,28 +36,28 @@ function Two(props) {
         <Ratings
           setRatings={setRatings}
           ratings={ratings}
-          setValue={props.useFormHandler.setValue}
-          name={"answerTwo"}
+          setValue={props.answerFormHandler.setValue}
+          name={"question2.answer"}
         />
         <div className="text-center pt-4 text-gray-700 font-bold">
           {ratings}/10
         </div>
         <div className="flex justify-between text-xs capitalize pt-3 ">
           <button
-            onClick={props.handleBack}
+            onClick={()=> props.handleBack(1)}
             className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
           >
             previous
           </button>
 
           <button
-            onClick={props.handleNext}
-            disabled={props.useFormHandler.watch("answerTwo") === ""}
+            onClick={()=>props.handleNext(1)}
+            disabled={props.answerFormHandler.watch("question2.answer") === ""}
             className={clsx({
               "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerTwo"),
+              props.answerFormHandler.watch("question2.answer"),
               "bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerTwo") === "",
+              props.answerFormHandler.watch("question2.answer") === "",
             })}
           >
             {props.currentStep === 3 ? "submit" : "next"}

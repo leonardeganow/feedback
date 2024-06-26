@@ -112,17 +112,19 @@ function Navbar() {
       href: "/myfeedback",
       id: 2,
     },
-    {
-      title: "Team feedback",
-      notifications: "",
-      href: "/teamfeedback",
-      id: 3,
-    },
+    // {
+    //   title: "Team feedback",
+    //   notifications: "",
+    //   href: "/teamfeedback",
+    //   id: 3,
+    // },
   ];
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
   };
+
+  
 
   return (
     <div className="h-[7dvh] flex justify-between items-center relative z-20 sm:px-20 px-5 bg-gray-100">

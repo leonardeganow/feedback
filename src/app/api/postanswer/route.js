@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/mongodb";
 import AnswerModel from "@/app/models/answer";
+import EmployeeModel from "@/app/models/employees";
 
 export async function POST(request) {
   try {
@@ -18,6 +19,17 @@ export async function POST(request) {
     });
 
     await newAnswer.save();
+
+    // const employee = await EmployeeModel.findById(employeeId);
+    // if (!employee) {
+    //   throw new Error("employee not found");
+    // }
+
+    // if (employee) {
+    //   employee.users.push({ userId, status: "complete" });
+    // }
+
+    // await employee.save();
 
     return NextResponse.json(
       {

@@ -59,19 +59,20 @@ function Page() {
       {
         queryKey: ["getemployees", 1],
         queryFn: () => getEmployees(),
-        refetchInterval: 5000, // Fetch data every 5 seconds
+        // refetchInterval: 5000, // Fetch data every 5 seconds
         refetchOnWindowFocus: true, // Refetch on window focus
         refetchOnMount: true, // Refetch when component mounts
       },
       {
         queryKey: ["getquestions", 1],
         queryFn: () => getQuestions(),
-        refetchInterval: 5000, // Fetch data every 5 seconds
+        // refetchInterval: 5000, // Fetch data every 5 seconds
         refetchOnWindowFocus: true, // Refetch on window focus
         refetchOnMount: true, // Refetch when component mounts
       },
     ],
   });
+
 
   return (
     <div className="">
@@ -81,6 +82,7 @@ function Page() {
           employees={employees.data}
           setStartQuestions={setStartQuestions}
           userData={userData}
+          setUserData={setUserData}
           questions={questions.data}
           answerFormHandler={answerFormHandler}
         />
@@ -115,16 +117,16 @@ function Page() {
                         setStartQuestions(true);
                         setUserData(item);
                         answerFormHandler.setValue("employeeId", item._id);
-                        answerFormHandler.setValue("userId", session.user.id);
+                        answerFormHandler.setValue("userId", session.user.email);
                       }}
                       className={clsx({
                         "bg-green-600 sm:w-[30%] w-[45%] py-1 text-xs sm:text-base text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":
-                          item.applicationStatus === "incomplete",
+                          item.status === "incomplete",
                         "bg-white border border-gray-400 text-xs sm:text-base text-gray-700 sm:w-[30%] w-[45%]  py-1 rounded cursor-pointer hover:bg-gray-300 hover:text-black font-medium":
-                          item.applicationStatus === "complete",
+                          item.status === "complete",
                       })}
                     >
-                      {item.applicationStatus === "complete"
+                      {item.status === "complete"
                         ? "view submissions"
                         : " fill out"}
                     </button>

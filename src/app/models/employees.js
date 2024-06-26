@@ -1,6 +1,8 @@
 // models/User.js
 import mongoose from "mongoose";
 
+
+
 const UserSchema = new mongoose.Schema(
   {
     fullname: {
@@ -11,9 +13,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    applicationStatus: {
-      type: String,
-    },
+
   },
   { collection: "employees" }
 );

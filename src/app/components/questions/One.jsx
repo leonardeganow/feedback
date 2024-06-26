@@ -35,13 +35,13 @@ function One(props) {
               <div
                 key={item.id}
                 onClick={() => {
-                  props.useFormHandler.setValue("answerOne", item.title);
+                  // props.useFormHandler.setValue("answerOne", item.title);
                   props.answerFormHandler.setValue("question1.answer", item.title)
                 }}
                 className={clsx({
                   "bg-gray-100 cursor-pointer p-3 font-medium hover:bg-gray-500 hover:text-white": true,
                   "bg-gray-500 text-white":
-                    props.useFormHandler.watch("answerOne") === item.title,
+                  props.answerFormHandler.watch("question1.answer") === item.title,
                 })}
               >
                 <h1 className="font-bold text-sm sm:text-md ">{item.title}</h1>
@@ -52,20 +52,20 @@ function One(props) {
         </div>
         <div className="flex justify-between text-xs capitalize pt-3 ">
           <button
-            onClick={props.handleBack}
+            onClick={()=> props.handleBack(0)}
             className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
           >
             previous
           </button>
 
           <button
-            onClick={props.handleNext}
-            disabled={props.useFormHandler.watch("answerOne") === ""}
+            onClick={()=>props.handleNext(1)}
+            disabled={props.answerFormHandler.watch("question1.answer") === ""}
             className={clsx({
               "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerOne"),
+              props.answerFormHandler.watch("question1.answer"),
               "bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize":
-                props.useFormHandler.watch("answerOne") === "",
+              props.answerFormHandler.watch("question1.answer") === "",
             })}
           >
             {props.currentStep === 3 ? "submit" : "next"}
