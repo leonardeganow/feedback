@@ -102,13 +102,13 @@ function Navbar() {
   const navOptions = [
     {
       title: "Share feedback",
-      notifications: "2",
+      // notifications: "2",
       href: "/home",
       id: 1,
     },
     {
       title: "My feedback",
-      notifications: "8",
+      // notifications: "8",
       href: "/myfeedback",
       id: 2,
     },
@@ -123,8 +123,6 @@ function Navbar() {
   const handleSignOut = async () => {
     await signOut({ callbackUrl: "/" });
   };
-
-  
 
   return (
     <div className="h-[7dvh] flex justify-between items-center relative z-20 sm:px-20 px-5 bg-gray-100">
