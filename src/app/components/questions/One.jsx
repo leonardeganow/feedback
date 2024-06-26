@@ -19,8 +19,8 @@ function One(props) {
 
   useEffect(() => {
     getQuestionOne();
-    props.answerFormHandler.setValue("question1.id", props.data._id);
-  }, []);
+    props.answerFormHandler.setValue("question1.id", questionOne?.title);
+  }, [questionOne]);
 
   return (
     <div>

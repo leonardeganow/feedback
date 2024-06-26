@@ -7,7 +7,7 @@ function Two(props) {
   const [ratings, setRatings] = useState(0);
 
   useEffect(() => {
-    props.answerFormHandler.setValue("question2.id", props.data._id);
+    props.answerFormHandler.setValue("question2.id", props.data.title);
     props.answerFormHandler.setValue("question2.answer", ratings.toString());
   }, [ratings]);
 
@@ -38,6 +38,8 @@ function Two(props) {
           ratings={ratings}
           setValue={props.answerFormHandler.setValue}
           name={"question2.answer"}
+          h={14}
+          w={14}
         />
         <div className="text-center pt-4 text-gray-700 font-bold">
           {ratings}/10

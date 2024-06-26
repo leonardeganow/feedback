@@ -50,10 +50,14 @@ function Ratings(props) {
           <div
             key={rating.id}
             onClick={() => {
-              props.setRatings(rating.value);
-              props.setValue(props.name, rating.value)
+              if (props.setRatings || props.setValue) {
+                props.setRatings(rating.value || "");
+                props.setValue(props.name, rating.value || "");
+              }
             }}
-            className={`sm:w-16 sm:h-16 w-10 h-10 cursor-pointer  ${
+            className={`sm:w-${props.w} sm:h-${
+              props.h
+            } w-10 h-10 cursor-pointer  ${
               props.ratings >= rating.value ? "bg-green-500" : "bg-gray-200"
             }`}
           ></div>

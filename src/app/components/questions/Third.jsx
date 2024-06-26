@@ -11,6 +11,7 @@ function Third(props) {
   const postAnswer = async () => {
     setLoader(true);
     const data = props.answerFormHandler.getValues();
+    console.log(data);
 
     try {
       const response = await axios.post("/api/postanswer", data);
@@ -28,7 +29,7 @@ function Third(props) {
   };
 
   useEffect(() => {
-    props.answerFormHandler.setValue("question3.id", props.data._id);
+    props.answerFormHandler.setValue("question3.id", props.data.title);
     props.answerFormHandler.setValue(
       "question3.answer",
       props.answerFormHandler.watch("question3.answer")
