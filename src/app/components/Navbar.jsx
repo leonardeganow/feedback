@@ -128,7 +128,7 @@ function Navbar() {
 
   return (
     <div className="h-[7dvh] flex justify-between items-center relative z-20 sm:px-20 px-5 bg-gray-100">
-      <Link href="/test">
+      <Link href="/">
         <Image src={logo} width={80} height={50} alt="logo" priority />
       </Link>
       <div className="hidden sm:flex gap-16">
