@@ -7,6 +7,7 @@ import Image from "next/image";
 import logo from "../../../public/images/feed.png";
 import { Oval } from "react-loader-spinner";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 function Page() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,8 +15,9 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
   const [image, setImage] = useState(null);
+
+  const Router = useRouter();
 
   const handleNameChange = (e) => setFullName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -48,6 +50,7 @@ function Page() {
         setPassword("");
         setEmail("");
         setImage(null);
+        Router.push("/");
       }
     } catch (error) {
       setLoading(false);
@@ -72,10 +75,6 @@ function Page() {
         <p className="font-semibold text-sm text-center text-gray-500 mb-4">
           Please enter details to create user
         </p>
-        {/* {message && (
-          <div className={`text-green-500 text-center`}>{message}</div>
-        )}
-        {error && <div className={`text-red-500 text-center`}>{error}</div>} */}
 
         <div className="mb-4">
           <label htmlFor="" className="font-semibold text-sm text-gray-600 ">
@@ -152,7 +151,6 @@ function Page() {
                 color="white"
                 ariaLabel="infinity-spin-loading"
               />
-              processing
             </div>
           ) : (
             "Submit"

@@ -14,7 +14,9 @@ function Page() {
             <h1 className="font-bold text-xl mb-5 text-gray-700">
               My Feedback
             </h1>
-            <div className="border-2  rounded shadow-lg"></div>
+            <div className="border-2  rounded shadow-lg">
+              
+            </div>
           </div>
         ) : (
           <div className="border p-5 shadow">

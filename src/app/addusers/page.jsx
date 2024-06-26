@@ -109,15 +109,13 @@ function Page() {
         >
           {loading ? (
             <div className="flex gap-x-2 justify-center items-center ">
-
               <Oval
                 visible={true}
                 width="25"
-                 height="30"
+                height="30"
                 color="white"
                 ariaLabel="infinity-spin-loading"
               />
-processing
             </div>
           ) : (
             "Submit"

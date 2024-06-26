@@ -10,9 +10,11 @@ import SkeletonLoader from "./SkeletonLoader";
 import { useQueries } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const { data: session } = useSession();
+  const Router = useRouter();
 
   const [startQuestions, setStartQuestions] = useState(false);
   const [userData, setUserData] = useState();
@@ -73,7 +75,6 @@ function Page() {
     ],
   });
 
-
   return (
     <div className="">
       <Navbar />
@@ -114,10 +115,17 @@ function Page() {
 
                     <button
                       onClick={() => {
-                        setStartQuestions(true);
-                        setUserData(item);
-                        answerFormHandler.setValue("employeeId", item._id);
-                        answerFormHandler.setValue("userId", session.user.email);
+                        if (item.status === "complete") {
+                          Router.push("/myfeedback");
+                        } else {
+                          setStartQuestions(true);
+                          setUserData(item);
+                          answerFormHandler.setValue("employeeId", item._id);
+                          answerFormHandler.setValue(
+                            "userId",
+                            session.user.email
+                          );
+                        }
                       }}
                       className={clsx({
                         "bg-green-600 sm:w-[30%] w-[45%] py-1 text-xs sm:text-base text-gray-100 rounded hover:bg-green-800 active:bg-green-900 cursor-pointe font-medium":

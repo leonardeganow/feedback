@@ -7,7 +7,6 @@ import { PASSWORD_REGEXP } from "./constants";
 import { useRouter } from "next/navigation";
 import { Circles, Oval } from "react-loader-spinner";
 import { useEffect, useState } from "react";
-import { FaFire } from "react-icons/fa";
 import logo from "../../public/images/feed.png";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
@@ -15,7 +14,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 export default function Home() {
-  const [errors, setErrors] = useState();
   const { data: session } = useSession();
 
   const Router = useRouter();
@@ -67,7 +65,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
 
   return (
     <div className="flex justify-center items-center h-[100dvh] bg-gray-100">

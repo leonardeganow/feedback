@@ -1,27 +1,31 @@
 import axios from "axios";
 import clsx from "clsx";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Oval } from "react-loader-spinner";
 import { toast } from "sonner";
 
 function Third(props) {
+  const [loader, setLoader] = useState(false);
 
-const postAnswer = async ()=>{
-  const data = props.answerFormHandler.getValues()
+  const postAnswer = async () => {
+    setLoader(true);
+    const data = props.answerFormHandler.getValues();
 
-  try {
-    const response = await axios.post('/api/postanswer', data)
-    if(response){
-      props.answerFormHandler.reset()
-      toast(response.data.message)
-      props.handleNext(1)
+    try {
+      const response = await axios.post("/api/postanswer", data);
+      if (response) {
+        setLoader(false);
+
+        props.answerFormHandler.reset();
+        toast(response.data.message);
+        props.handleNext(1);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoader(false);
     }
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-
+  };
 
   useEffect(() => {
     props.answerFormHandler.setValue("question3.id", props.data._id);
@@ -58,7 +62,7 @@ const postAnswer = async ()=>{
         ></textarea>
         <div className="flex justify-between text-xs capitalize pt-2 ">
           <button
-            onClick={()=> props.handleBack(1)}
+            onClick={() => props.handleBack(1)}
             className="bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize"
           >
             previous
@@ -66,15 +70,27 @@ const postAnswer = async ()=>{
 
           <button
             onClick={postAnswer}
-            disabled={props.answerFormHandler.watch("question3.answer") === ""}
+            disabled={loader}
             className={clsx({
               "bg-green-600 font-semibold text-white w-[150px] rounded py-2 capitalize":
-              props.answerFormHandler.watch("question3.answer"),
+                props.answerFormHandler.watch("question3.answer"),
               "bg-gray-400 font-semibold text-white w-[150px] rounded py-2 capitalize":
-              props.answerFormHandler.watch("question3.answer") === "",
+                props.answerFormHandler.watch("question3.answer") === "",
             })}
           >
-            {props.currentStep === 3 ? "submit" : "next"}
+            {loader ? (
+              <div className="flex justify-center items-center">
+                <Oval
+                  visible={true}
+                  width="25"
+                  height="30"
+                  color="white"
+                  ariaLabel="infinity-spin-loading"
+                />
+              </div>
+            ) : (
+              "submit"
+            )}
           </button>
         </div>
       </div>
